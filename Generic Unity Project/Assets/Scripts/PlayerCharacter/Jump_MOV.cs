@@ -11,7 +11,8 @@ public class Jump : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     public float JumpForce = 50.0f;
-    
+    private int JumpNumber = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +24,22 @@ public class Jump : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            //don't add force across, only up
-            _rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+            if (JumpNumber == 0)
+            {
+                JumpNumber++;
+                //don't add force across, only up
+                _rigidbody2D.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
+            }
+        }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision2D)
+    {
+        Debug.Log("Collision");
+        if (collision2D.gameObject.CompareTag("Platform"))
+        {
+            Debug.Log("Floor Collide");
+            JumpNumber = 0;
         }
     }
 }

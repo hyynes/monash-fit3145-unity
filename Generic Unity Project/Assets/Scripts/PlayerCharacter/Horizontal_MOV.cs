@@ -5,6 +5,7 @@ using UnityEngine;
 public class Horizontal_MOV : MonoBehaviour
 {
     
+    
     private Rigidbody2D _rigidbody2D;
     public float Speed = 50.0f;
     

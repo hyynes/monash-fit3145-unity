@@ -137,10 +137,10 @@ GameObject:
   - component: {fileID: 569799368}
   m_Layer: 0
   m_Name: NotLava (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!50 &569799368
 Rigidbody2D:
@@ -181,7 +181,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -295,10 +295,10 @@ GameObject:
   - component: {fileID: 575495819}
   m_Layer: 0
   m_Name: NotLava
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!50 &575495819
 Rigidbody2D:
@@ -339,7 +339,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -449,12 +449,13 @@ GameObject:
   m_Component:
   - component: {fileID: 692077822}
   - component: {fileID: 692077823}
+  - component: {fileID: 692077824}
   m_Layer: 0
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &692077822
 Transform:
@@ -516,6 +517,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &692077824
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692077820}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &781267399
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,12 +554,13 @@ GameObject:
   m_Component:
   - component: {fileID: 781267401}
   - component: {fileID: 781267402}
+  - component: {fileID: 781267403}
   m_Layer: 0
   m_Name: Bounds (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &781267401
 Transform:
@@ -593,6 +622,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &781267403
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781267399}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &910270237 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4486601590521490417, guid: c486caf4d2e1e524683bbf8da0e34761, type: 3}
@@ -610,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7166d6c2228b64f8909a94de5dc518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 375
+  JumpForce: 15
 --- !u!50 &910270242
 Rigidbody2D:
   serializedVersion: 4
@@ -624,9 +680,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0.8
   m_AngularDrag: 2
-  m_GravityScale: 0.6
+  m_GravityScale: 1.6
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -650,7 +706,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0cd12a47597a249a669e9bef431a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 250
+  Speed: 400
+--- !u!114 &910270247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910270237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3992939b08d9cd45a0870d6f58e1d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashSpeed: 7.5
 --- !u!1 &1938581442
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,10 +826,10 @@ GameObject:
   - component: {fileID: 2058026207}
   m_Layer: 0
   m_Name: NotLava (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!50 &2058026207
 Rigidbody2D:
@@ -801,7 +870,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -909,6 +978,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3819087531783500531, guid: c486caf4d2e1e524683bbf8da0e34761, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4486601590521490417, guid: c486caf4d2e1e524683bbf8da0e34761, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
@@ -978,6 +1051,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4486601590521490417, guid: c486caf4d2e1e524683bbf8da0e34761, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910270243}
+    - targetCorrespondingSourceObject: {fileID: 4486601590521490417, guid: c486caf4d2e1e524683bbf8da0e34761, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910270247}
   m_SourcePrefab: {fileID: 100100000, guid: c486caf4d2e1e524683bbf8da0e34761, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
