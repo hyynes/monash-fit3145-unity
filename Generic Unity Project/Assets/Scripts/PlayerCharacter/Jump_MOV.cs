@@ -10,13 +10,17 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
-    public float JumpForce = 50.0f;
+    public float JumpForce = 13.5f;
     private int JumpNumber = 0;
+
+    public float fallingGravityMultiplier = 1.05f;
+    private float originalGravityScale;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        originalGravityScale = _rigidbody2D.gravityScale;
     }
 
     // Update is called once per frame
@@ -27,9 +31,22 @@ public class Jump : MonoBehaviour
             if (JumpNumber == 0)
             {
                 JumpNumber++;
+                
                 //don't add force across, only up
-                _rigidbody2D.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, JumpForce);
             }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (_rigidbody2D.velocity.y < 0)
+        {
+            _rigidbody2D.gravityScale *= fallingGravityMultiplier;
+        }
+        else
+        {
+            _rigidbody2D.gravityScale = originalGravityScale;
         }
     }
     
