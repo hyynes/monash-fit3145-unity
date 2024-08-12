@@ -13,7 +13,8 @@ public class Jump : MonoBehaviour
     public float JumpForce = 13.5f;
     private int JumpNumber = 0;
 
-    public float fallingGravityMultiplier = 1.05f;
+    public float fallingGravityMultiplier = 1.07f;
+    public float maxGravityScale = 4.2f;
     private float originalGravityScale;
 
     // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class Jump : MonoBehaviour
         if (_rigidbody2D.velocity.y < 0)
         {
             _rigidbody2D.gravityScale *= fallingGravityMultiplier;
+            _rigidbody2D.gravityScale = Mathf.Clamp(_rigidbody2D.gravityScale, 0, maxGravityScale);
         }
         else
         {
