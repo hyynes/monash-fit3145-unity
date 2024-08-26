@@ -6,9 +6,7 @@ public class Horizontal_MOV : MonoBehaviour
 {
     
     private Rigidbody2D _rigidbody2D;
-    public float acceleration = 50.0f;
-    public float maximumVelocity = 30.0f;
-    public float horizontalVelocity = 0.0f;
+    public float speed = 5;
         
     // Start is called before the first frame update
     void Start()
@@ -17,13 +15,7 @@ public class Horizontal_MOV : MonoBehaviour
     }
     void FixedUpdate()
     {
-        float horizontalAcceleration = Input.GetAxis("Horizontal") * acceleration;
-        Vector2 forceToAdd = new Vector2(horizontalAcceleration, 0.0f);
-
-        horizontalVelocity = _rigidbody2D.velocity.x;
-        _rigidbody2D.AddForce(forceToAdd);
-
-        float horizontalMovement = Mathf.Clamp(_rigidbody2D.velocity.x, -maximumVelocity, maximumVelocity);
-        _rigidbody2D.velocity = new Vector2(horizontalMovement, _rigidbody2D.velocity.y);
+        float horizontalDirection = Input.GetAxis("Horizontal");
+        _rigidbody2D.velocity = new Vector2(horizontalDirection * speed, _rigidbody2D.velocity.y);
     }
 }

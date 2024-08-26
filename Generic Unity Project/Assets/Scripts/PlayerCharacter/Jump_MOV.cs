@@ -16,6 +16,7 @@ public class Jump : MonoBehaviour
     public float fallingGravityMultiplier = 1.07f;
     public float maxGravityScale = 4.2f;
     private float originalGravityScale;
+    private bool bIsGrounded = true;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && bIsGrounded)
         {
             if (JumpNumber == 0)
             {
@@ -52,13 +53,22 @@ public class Jump : MonoBehaviour
         }
     }
     
-    private void OnCollisionEnter2D(Collision2D collision2D)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision");
-        if (collision2D.gameObject.CompareTag("Platform"))
+        // Check if player is on the ground
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            Debug.Log("Floor Collide");
+            bIsGrounded = true;
             JumpNumber = 0;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Check if player leaves the ground
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            bIsGrounded = false;
         }
     }
 }
