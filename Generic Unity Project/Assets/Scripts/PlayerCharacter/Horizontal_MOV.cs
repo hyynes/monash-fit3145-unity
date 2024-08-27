@@ -13,7 +13,7 @@ public class Horizontal_MOV : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
-    void FixedUpdate()
+    void Update()
     {
         float horizontalDirection = Input.GetAxis("Horizontal");
         _rigidbody2D.velocity = new Vector2(horizontalDirection * speed, _rigidbody2D.velocity.y);

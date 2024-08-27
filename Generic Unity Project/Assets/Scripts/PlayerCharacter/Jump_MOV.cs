@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //base code: https://docs.unity3d.com/Manual/ios-handle-game-controller-input.html
@@ -10,13 +11,17 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
+    
     public float JumpForce = 13.5f;
+    public float maxJumps = 2;
     private int JumpNumber = 0;
 
     public float fallingGravityMultiplier = 1.07f;
     public float maxGravityScale = 4.2f;
     private float originalGravityScale;
-    private bool bIsGrounded = true;
+
+    public bool bIsGliding = false;
+    public float glideGravityScale = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +33,24 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && bIsGrounded)
+        if (JumpNumber >= maxJumps)
         {
-            if (JumpNumber == 0)
+            if (Input.GetButton("Jump"))
+            {
+                bIsGliding = true;
+            }
+            else
+            {
+                bIsGliding = false;
+            }
+        }
+        
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (JumpNumber < maxJumps)
             {
                 JumpNumber++;
+                bIsGliding = false;
                 
                 //don't add force across, only up
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, JumpForce);
@@ -42,10 +60,17 @@ public class Jump : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_rigidbody2D.velocity.y < 0)
+        if (_rigidbody2D.velocity.y <= 0)
         {
-            _rigidbody2D.gravityScale *= fallingGravityMultiplier;
-            _rigidbody2D.gravityScale = Mathf.Clamp(_rigidbody2D.gravityScale, 0, maxGravityScale);
+            if (bIsGliding)
+            {
+                _rigidbody2D.gravityScale = glideGravityScale;
+            }
+            else
+            {
+                _rigidbody2D.gravityScale *= fallingGravityMultiplier;
+                _rigidbody2D.gravityScale = Mathf.Clamp(_rigidbody2D.gravityScale, 0, maxGravityScale);   
+            }
         }
         else
         {
@@ -58,17 +83,8 @@ public class Jump : MonoBehaviour
         // Check if player is on the ground
         if (collision.gameObject.CompareTag("Platform"))
         {
-            bIsGrounded = true;
             JumpNumber = 0;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // Check if player leaves the ground
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            bIsGrounded = false;
+            bIsGliding = false;
         }
     }
 }
