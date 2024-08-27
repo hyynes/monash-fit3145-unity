@@ -14,11 +14,11 @@ public class Jump : MonoBehaviour
     
     public float JumpForce = 13.5f;
     public float maxJumps = 2;
-    private int JumpNumber = 0;
+    public int JumpNumber = 0;
 
     public float fallingGravityMultiplier = 1.07f;
     public float maxGravityScale = 4.2f;
-    private float originalGravityScale;
+    public float originalGravityScale;
 
     public bool bIsGliding = false;
     public float glideGravityScale = 1f;
