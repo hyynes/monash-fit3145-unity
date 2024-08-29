@@ -63,6 +63,7 @@ public class DeathBehaviour : MonoBehaviour
         movementScript.enabled = true;
         jumpScript.JumpNumber = 0; // Reset jump count
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Hazard"))

@@ -16,6 +16,7 @@ public class Horizontal_MOV : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    
     void Update()
     {
         float horizontalDirection = Input.GetAxis("Horizontal");
