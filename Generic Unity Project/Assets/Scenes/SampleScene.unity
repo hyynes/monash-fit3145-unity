@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sugar (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2833562423366562206, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
+      propertyPath: UnavailableSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e2a5947905308b4f8dc9067f67283a0, type: 3}
     - target: {fileID: 3277618008672754565, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6260014
@@ -748,6 +752,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sugar (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2833562423366562206, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
+      propertyPath: UnavailableSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e2a5947905308b4f8dc9067f67283a0, type: 3}
     - target: {fileID: 3277618008672754565, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6260014
@@ -2491,11 +2499,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6180a92192ac75439529b7e5ee0f898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumCameraX: -10
-  minimumCameraY: -10
-  maximumCameraX: 100
-  maximumCameraY: 20
-  cameraSpeed: 5
+  MinimumCameraX: -10
+  MinimumCameraY: -10
+  MaximumCameraX: 100
+  MaximumCameraY: 20
+  CameraSpeed: 5
 --- !u!4 &520890635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8499835509610796631, guid: 8d1728f315e2adb449398fea0eee2880, type: 3}
@@ -3439,6 +3447,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sugar (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2833562423366562206, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
+      propertyPath: UnavailableSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e2a5947905308b4f8dc9067f67283a0, type: 3}
     - target: {fileID: 3277618008672754565, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6260014
@@ -6445,8 +6457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68e69aa66d95a44ea07dcc73dd11686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSpawn: {fileID: 0}
-  respawnDelay: 3
+  StartingSpawn: {fileID: 0}
+  RespawnDelay: 1
 --- !u!114 &1516566985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6459,7 +6471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0cd12a47597a249a669e9bef431a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  Speed: 5
 --- !u!114 &1516566986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6473,14 +6485,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 15
-  maxJumps: 1
+  MaxJumps: 1
   JumpNumber: 0
-  fallingGravityMultiplier: 1.07
-  maxGravityScale: 4.2
-  originalGravityScale: 0
+  FallingGravityMultiplier: 1.07
+  MaxGravityScale: 4.2
+  OriginalGravityScale: 0
   bIsGliding: 0
-  glideGravityScale: 1
-  glidingSprite: {fileID: 21300000, guid: 4a768f4009da5674f97f8b654a04b220, type: 3}
+  GlideGravityScale: 0.5
+  GlidingSprite: {fileID: 0}
 --- !u!50 &1516566987
 Rigidbody2D:
   serializedVersion: 4
@@ -8892,6 +8904,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sugar
       objectReference: {fileID: 0}
+    - target: {fileID: 2833562423366562206, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
+      propertyPath: UnavailableSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e2a5947905308b4f8dc9067f67283a0, type: 3}
     - target: {fileID: 3277618008672754565, guid: 6ce45e192f921c14db8ade54a5999677, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6260014
