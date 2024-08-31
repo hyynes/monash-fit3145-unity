@@ -1,34 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
+// This script was modified from a similar horizontal movement script in FIT3039 (coded by Danny)
 public class Horizontal_MOV : MonoBehaviour
 {
-    
     private Rigidbody2D _rigidbody2D;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer SpriteRenderer;
     
-    public float speed = 5;
+    public float Speed = 5;
         
     // Start is called before the first frame update
     void Start()
     {
+        // get necessary components
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
     
+    // responsible for setting character's translation in the x axis
     void Update()
     {
-        float horizontalDirection = Input.GetAxis("Horizontal");
-        _rigidbody2D.velocity = new Vector2(horizontalDirection * speed, _rigidbody2D.velocity.y);
+        // get horizontal direction
+        float HorizontalDirection = Input.GetAxis("Horizontal");
         
-        if (horizontalDirection > 0)
+        // translate the player along that direction with the speed
+        _rigidbody2D.velocity = new Vector2(HorizontalDirection * Speed, _rigidbody2D.velocity.y);
+        
+        // flip sprite according to horizontal direction
+        if (HorizontalDirection > 0)
         {
-            spriteRenderer.flipX = false;
+            SpriteRenderer.flipX = false;
         }
-        else if (horizontalDirection < 0)
+        else if (HorizontalDirection < 0)
         {
-            spriteRenderer.flipX = true;
+            SpriteRenderer.flipX = true;
         }
         
     }

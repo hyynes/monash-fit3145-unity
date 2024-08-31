@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class DeathBehaviour : MonoBehaviour
 {
-    private Transform respawnPoint;
-    public Transform startingSpawn;
+    private Transform RespawnPoint;
+    public Transform StartingSpawn;
         
-    public float respawnDelay = 3;
+    public float RespawnDelay = 1;
     
     // player states
     private Rigidbody2D _rigidbody2D;
-    private Jump jumpScript;
-    private Horizontal_MOV movementScript;
+    private Jump JumpScript;
+    private Horizontal_MOV MovementScript;
     
     // Start is called before the first frame update
     void Start()
     {
+        // get necessary components
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        jumpScript = GetComponent<Jump>();
-        movementScript = GetComponent<Horizontal_MOV>();
+        JumpScript = GetComponent<Jump>();
+        MovementScript = GetComponent<Horizontal_MOV>();
         
-        if (startingSpawn)
+        // starting spawn needs to be initialised in engine; otherwise the player respawns at their position of death
+        if (StartingSpawn)
         {
-            respawnPoint = startingSpawn;  
+            RespawnPoint = StartingSpawn;  
         }
         else
         {
-            respawnPoint = transform;
+            RespawnPoint = transform;
         }
     }
 
@@ -36,49 +38,54 @@ public class DeathBehaviour : MonoBehaviour
     {
     }
     
+    // when the player touches a hazard, they die
     void Die()
     {
-        // Disable player controls
+        // Disable player controls and set movement vector to zero
         _rigidbody2D.velocity = Vector2.zero;
         _rigidbody2D.gravityScale = 0;
         GetComponent<Collider2D>().enabled = false;
-        jumpScript.enabled = false;
-        movementScript.enabled = false;
+        JumpScript.enabled = false;
+        MovementScript.enabled = false;
 
         // Start the respawn process
         StartCoroutine(Respawn());
     }
 
+    // after the respawn timer delay, the player respawns at their respawn location
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(respawnDelay);
+        yield return new WaitForSeconds(RespawnDelay);
 
         // Reset player's position to the respawn point
-        transform.position = respawnPoint.position;
+        transform.position = RespawnPoint.position;
 
         // Reset states
-        _rigidbody2D.gravityScale = jumpScript.originalGravityScale;
+        _rigidbody2D.gravityScale = JumpScript.OriginalGravityScale;
         GetComponent<Collider2D>().enabled = true;
-        jumpScript.enabled = true;
-        movementScript.enabled = true;
-        jumpScript.JumpNumber = 0; // Reset jump count
+        JumpScript.enabled = true;
+        MovementScript.enabled = true;
+        JumpScript.JumpNumber = 0; // Reset jump count
     }
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    // check if the player is on a hazard; if they are, call the die method
+    // otherwise, if they are on a checkpoint, reset their respawn point
+    private void OnTriggerEnter2D(Collider2D Collision)
     {
-        if (collision.CompareTag("Hazard"))
+        if (Collision.CompareTag("Hazard"))
         {
             Debug.Log("die");
             Die();
         }
-        else if (collision.CompareTag("Checkpoint"))
+        else if (Collision.CompareTag("Checkpoint"))
         {
-            setRespawnPoint(collision.transform);
+            setRespawnPoint(Collision.transform);
         }
     }
     
-    public void setRespawnPoint(Transform respawnPoint)
+    // reset player spawn point
+    public void setRespawnPoint(Transform RespawnPoint)
     {
-        this.respawnPoint = respawnPoint;
+        this.RespawnPoint = RespawnPoint;
     }
 }

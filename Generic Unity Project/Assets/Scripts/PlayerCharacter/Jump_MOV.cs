@@ -4,39 +4,41 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//base code: https://docs.unity3d.com/Manual/ios-handle-game-controller-input.html
+// base code: https://docs.unity3d.com/Manual/ios-handle-game-controller-input.html
 
 public class Jump : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     
     public float JumpForce = 13.5f;
-    public float maxJumps = 2;
+    public float MaxJumps = 2;
     public int JumpNumber = 0;
 
-    public float fallingGravityMultiplier = 1.07f;
-    public float maxGravityScale = 4.2f;
-    public float originalGravityScale;
+    public float FallingGravityMultiplier = 1.07f;
+    public float MaxGravityScale = 4.2f;
+    public float OriginalGravityScale;
 
     public bool bIsGliding = false;
-    public float glideGravityScale = 1f;
-    private SpriteRenderer spriteRenderer;
-    private Sprite spriteBeforeGliding;
-    [SerializeField] private Sprite glidingSprite;
+    public float GlideGravityScale = 1f;
+    private SpriteRenderer SpriteRenderer;
+    private Sprite SpriteBeforeGliding;
+    [SerializeField] private Sprite GlidingSprite;
 
     // Start is called before the first frame update
     void Start()
     {
+        // get necessary components
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        originalGravityScale = _rigidbody2D.gravityScale;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteBeforeGliding = spriteRenderer.sprite;
+        OriginalGravityScale = _rigidbody2D.gravityScale;
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteBeforeGliding = SpriteRenderer.sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (JumpNumber >= maxJumps)
+        // gliding
+        if (JumpNumber >= MaxJumps)
         {
             if (Input.GetButton("Jump"))
             {
@@ -48,11 +50,14 @@ public class Jump : MonoBehaviour
             }
         }
         
+        // jump mechanism
         if (Input.GetButtonDown("Jump"))
         {
-            if (JumpNumber < maxJumps)
+            if (JumpNumber < MaxJumps)
             {
                 JumpNumber++;
+                
+                // method to ensure that the sprite updates accordingly
                 StopGliding();
                 
                 //don't add force across, only up
@@ -61,35 +66,48 @@ public class Jump : MonoBehaviour
         }
     }
 
+    
+    // fixed update changes gravity scale according to player action
     void FixedUpdate()
     {
+        // ensure that gravity scale increases when player falls down; removes "floaty" feeling
         if (_rigidbody2D.velocity.y <= 0)
         {
+            
+            // if the player is currently gliding, update their sprite and change the gravity scale accordingly
             if (bIsGliding)
             {
-                _rigidbody2D.gravityScale = glideGravityScale;
-                if (glidingSprite)
+                _rigidbody2D.gravityScale = GlideGravityScale;
+                if (GlidingSprite)
                 {
-                    spriteRenderer.sprite = glidingSprite;   
+                    SpriteRenderer.sprite = GlidingSprite;   
                 }
             }
+            
+            // otherwise, increase the gravity scale by a multiplier
             else
             {
-                _rigidbody2D.gravityScale *= fallingGravityMultiplier;
-                _rigidbody2D.gravityScale = Mathf.Clamp(_rigidbody2D.gravityScale, 0, maxGravityScale);   
+                _rigidbody2D.gravityScale *= FallingGravityMultiplier;
+                _rigidbody2D.gravityScale = Mathf.Clamp(_rigidbody2D.gravityScale, 0, MaxGravityScale);   
             }
+            
+            // if the velocity is above zero, don't change the gravity scale
         }
         else
         {
-            _rigidbody2D.gravityScale = originalGravityScale;
+            _rigidbody2D.gravityScale = OriginalGravityScale;
         }
     }
+    
+    // responsible for checking jump crystal behaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // jump crystal behaviour
         if (collision.CompareTag("Sugar"))
         {
             JumpCrystalBehaviour crystalBehaviour = collision.gameObject.GetComponent<JumpCrystalBehaviour>();
             
+            // if the jump crystal is available, reset the number of jumps
             if (crystalBehaviour.bIsAvailable)
             {
                 JumpNumber = 0;
@@ -98,9 +116,10 @@ public class Jump : MonoBehaviour
         }
     }
 
+    // responsible for refreshing jump number on platform landing
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if player is on the ground
+        // Check if player is on the ground, if they are, reset the jump number and if they were gliding, reset their sprite
         if (collision.gameObject.CompareTag("Platform"))
         {
             JumpNumber = 0;
@@ -108,9 +127,10 @@ public class Jump : MonoBehaviour
         }
     }
 
+    // responsible for resetting player sprite and gliding state
     private void StopGliding()
     {
         bIsGliding = false;
-        spriteRenderer.sprite = spriteBeforeGliding;
+        SpriteRenderer.sprite = SpriteBeforeGliding;
     }
 }

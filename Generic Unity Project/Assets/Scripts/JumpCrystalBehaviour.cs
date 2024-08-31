@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class JumpCrystalBehaviour : MonoBehaviour
 {
-    [SerializeField] private float crystalRefreshFrequency = 2;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private float CrystalRefreshFrequency = 2;
+    private SpriteRenderer SpriteRenderer;
     public bool bIsAvailable = true;
-    private Sprite availableSprite;
-    [SerializeField] private Sprite unavailableSprite;
+    private Sprite AvailableSprite;
+    [SerializeField] private Sprite UnavailableSprite;
     
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        availableSprite = spriteRenderer.sprite;
+        // get necessary components
+        SpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        AvailableSprite = SpriteRenderer.sprite;
     }
 
     // Update is called once per frame
@@ -24,25 +26,29 @@ public class JumpCrystalBehaviour : MonoBehaviour
         
     }
 
+    // responsible for setting the crystal to not available
     public void DestroyThenRefresh()
     {
         if (bIsAvailable)
         {
             bIsAvailable = false;
             
-            if (unavailableSprite)
+            // change sprite
+            if (UnavailableSprite)
             {
-                spriteRenderer.sprite = unavailableSprite;
+                SpriteRenderer.sprite = UnavailableSprite;
             }
             
+            // after a set delay, refresh the availability
             StartCoroutine(Refresh());
         }
     }
 
+    // responsible for setting the crystal to available
     IEnumerator Refresh()
     {
-        yield return new WaitForSeconds(crystalRefreshFrequency);
+        yield return new WaitForSeconds(CrystalRefreshFrequency);
         bIsAvailable = true;
-        spriteRenderer.sprite = availableSprite;
+        SpriteRenderer.sprite = AvailableSprite;
     }
 }
