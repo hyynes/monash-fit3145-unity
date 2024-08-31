@@ -2224,7 +2224,7 @@ GameObject:
   - component: {fileID: 506907232}
   m_Layer: 0
   m_Name: BoxColliders (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4395,7 +4395,7 @@ GameObject:
   - component: {fileID: 1062427855}
   m_Layer: 0
   m_Name: BoxColliders (3)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6473,7 +6473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 15
-  maxJumps: 2
+  maxJumps: 1
   JumpNumber: 0
   fallingGravityMultiplier: 1.07
   maxGravityScale: 4.2
@@ -7053,7 +7053,7 @@ GameObject:
   - component: {fileID: 1669965014}
   m_Layer: 0
   m_Name: BoxColliders (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

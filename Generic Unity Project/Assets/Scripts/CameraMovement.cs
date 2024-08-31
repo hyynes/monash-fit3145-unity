@@ -2,37 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script was modified from a similar camera movement script in FIT3039 (coded by Danny)
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private float minimumCameraX;
-    [SerializeField] private float minimumCameraY;
-    [SerializeField] private float maximumCameraX;
-    [SerializeField] private float maximumCameraY;
+    [SerializeField] private float MinimumCameraX;
+    [SerializeField] private float MinimumCameraY;
+    [SerializeField] private float MaximumCameraX;
+    [SerializeField] private float MaximumCameraY;
 
-    [SerializeField] private float cameraSpeed = 5f;
+    [SerializeField] private float CameraSpeed = 5f;
 
-    private Transform player;
+    private Transform Player;
     
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        Player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player)
+        if (Player)
         {
             // Move the camera to follow the player
-            Vector3 newCameraPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+            Vector3 NewCameraPosition = new Vector3(Player.position.x, Player.position.y, transform.position.z);
 
             // Clamp the camera position within the bounds
-            newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, minimumCameraX, maximumCameraX);
-            newCameraPosition.y = Mathf.Clamp(newCameraPosition.y, minimumCameraY, maximumCameraY);
+            NewCameraPosition.x = Mathf.Clamp(NewCameraPosition.x, MinimumCameraX, MaximumCameraX);
+            NewCameraPosition.y = Mathf.Clamp(NewCameraPosition.y, MinimumCameraY, MaximumCameraY);
 
             // Smoothly move the camera towards the new position
-            transform.position = Vector3.Lerp(transform.position, newCameraPosition, cameraSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, NewCameraPosition, CameraSpeed * Time.deltaTime);
 
         }
     }

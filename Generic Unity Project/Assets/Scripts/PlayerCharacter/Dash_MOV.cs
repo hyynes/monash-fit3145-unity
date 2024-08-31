@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+// NOT USED IN CURRENT IMPLEMENTATION
 public class Dash_MOV : MonoBehaviour
 {
     //facing direction
