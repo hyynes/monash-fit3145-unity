@@ -13,6 +13,9 @@ public class DeathBehaviour : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Jump JumpScript;
     private Horizontal_MOV MovementScript;
+    private SpriteRenderer SpriteRenderer;
+    private Sprite SpriteBeforeDeath;
+    [SerializeField] private Sprite DeathSprite;
     
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,8 @@ public class DeathBehaviour : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         JumpScript = GetComponent<Jump>();
         MovementScript = GetComponent<Horizontal_MOV>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteBeforeDeath = SpriteRenderer.sprite;
         
         // starting spawn needs to be initialised in engine; otherwise the player respawns at their position of death
         if (StartingSpawn)
@@ -47,6 +52,11 @@ public class DeathBehaviour : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         JumpScript.enabled = false;
         MovementScript.enabled = false;
+        
+        if (DeathSprite)
+        {
+            SpriteRenderer.sprite = DeathSprite;
+        }
 
         // Start the respawn process
         StartCoroutine(Respawn());
@@ -65,6 +75,7 @@ public class DeathBehaviour : MonoBehaviour
         GetComponent<Collider2D>().enabled = true;
         JumpScript.enabled = true;
         MovementScript.enabled = true;
+        SpriteRenderer.sprite = SpriteBeforeDeath;
         JumpScript.JumpNumber = 0; // Reset jump count
     }
     

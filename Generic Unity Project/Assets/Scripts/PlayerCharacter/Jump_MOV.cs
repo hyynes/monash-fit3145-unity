@@ -22,6 +22,7 @@ public class Jump : MonoBehaviour
     public float GlideGravityScale = 1f;
     private SpriteRenderer SpriteRenderer;
     private Sprite SpriteBeforeGliding;
+    [SerializeField] private Sprite JumpingSprite;
     [SerializeField] private Sprite GlidingSprite;
 
     // Start is called before the first frame update
@@ -46,7 +47,11 @@ public class Jump : MonoBehaviour
             }
             else
             {
-                StopGliding();
+                if (JumpingSprite)
+                {
+                    SpriteRenderer.sprite = JumpingSprite;
+                    bIsGliding = false;
+                }
             }
         }
         
@@ -57,8 +62,10 @@ public class Jump : MonoBehaviour
             {
                 JumpNumber++;
                 
-                // method to ensure that the sprite updates accordingly
-                StopGliding();
+                if (JumpingSprite)
+                {
+                    SpriteRenderer.sprite = JumpingSprite;   
+                }
                 
                 //don't add force across, only up
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, JumpForce);
